@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soccer Clinics OKC — Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cream:       #F5F0E8;
+      --forest:      #1B3A2F;
+      --deep-forest: #254D40;
+      --mid-green:   #3D6B5A;
+      --sage:        #8AAF9F;
+      --soft-gold:   #E8C97A;
+      --gold:        #D4A843;
+      --black:       #0F1F19;
+    }
+
+    body { background: var(--cream); font-family: 'Inter', sans-serif; color: var(--forest); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+    /* ── HEADER ── */
+    .site-header { background: var(--forest); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-mark { display: flex; flex-direction: column; line-height: 1; }
+    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 1px; color: var(--cream); text-transform: uppercase; }
+    .logo-sub { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-top: 1px; }
+    .header-badge { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 5px 12px; border-radius: 2px; }
+
+    /* ── HERO ── */
+    .hero { background: var(--forest); padding: 28px 20px 32px; border-bottom: 3px solid var(--gold); }
+    .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .hero-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 48px; line-height: 0.9; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
+    .hero-headline .gold { color: var(--gold); }
+    .hero-sub { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--sage); line-height: 1.55; margin-bottom: 18px; }
+    .hero-facts { display: flex; flex-direction: column; gap: 6px; }
+    .hero-fact { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--sage); }
+    .hero-fact .dot { color: var(--gold); margin-right: 6px; }
+
+    /* ── MAIN ── */
+    .main { max-width: 640px; margin: 0 auto; padding: 28px 16px 72px; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap { margin-bottom: 32px; }
+    .progress-steps { display: flex; align-items: center; margin-bottom: 6px; }
+    .progress-step { display: flex; align-items: center; flex: 1; }
+    .progress-step:last-child { flex: 0; }
+    .progress-dot { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; border: 2px solid rgba(61,107,90,0.2); color: rgba(61,107,90,0.35); background: transparent; transition: all 0.3s; cursor: default; user-select: none; }
+    .progress-dot.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .progress-dot.done { background: var(--forest); color: var(--cream); border-color: var(--forest); cursor: pointer; }
+    .progress-dot.done:hover { background: var(--mid-green); border-color: var(--mid-green); }
+    .progress-line { flex: 1; height: 2px; background: rgba(61,107,90,0.12); margin: 0 3px; transition: background 0.3s; }
+    .progress-line.done { background: var(--forest); }
+    .progress-labels { display: flex; justify-content: space-between; }
+    .progress-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(61,107,90,0.3); flex: 1; transition: color 0.3s; }
+    .progress-label:last-child { flex: 0; min-width: 48px; text-align: right; }
+    .progress-label.active { color: var(--gold); }
+    .progress-label.done { color: var(--forest); }
+
+    /* ── STEP PANELS ── */
+    .step-panel { display: none; animation: fadeUp 0.2s ease; }
+    .step-panel.active { display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .step-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 36px; line-height: 0.92; text-transform: uppercase; color: var(--forest); margin-bottom: 4px; }
+    .step-heading .gold { color: var(--gold); }
+    .step-sub { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--mid-green); line-height: 1.55; margin-bottom: 24px; }
+
+    /* ── MULTI-CHILD NOTICE ── */
+    .multi-notice {
+      background: rgba(212,168,67,0.08);
+      border: 1px solid rgba(212,168,67,0.25);
+      border-left: 3px solid var(--gold);
+      border-radius: 4px; padding: 12px 16px; margin-bottom: 24px;
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      color: var(--mid-green); line-height: 1.6;
+    }
+    .multi-notice strong { color: var(--gold); }
+
+    /* ── FORM FIELDS ── */
+    .form-section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .fields-stack { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+    .form-group label { display: block; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid-green); margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; background: var(--forest); color: var(--cream); border: 1px solid rgba(138,175,159,0.18); border-radius: 3px; padding: 14px; font-family: 'Inter', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; appearance: none; -webkit-appearance: none; }
+    .form-group input::placeholder { color: rgba(138,175,159,0.4); }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238AAF9F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+    .form-group select option { background: var(--forest); }
+    .field-error { font-family: 'Inter', sans-serif; font-size: 12px; color: #e57373; margin-top: 5px; display: none; }
+    .form-group.has-error input, .form-group.has-error select { border-color: #e57373; }
+    .form-group.has-error .field-error { display: block; }
+    .field-divider { border: none; border-top: 1px solid rgba(61,107,90,0.18); margin: 20px 0; }
+
+    /* ── CHILD CARDS (Step 2) ── */
+    .child-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+
+    .child-card {
+      background: var(--forest);
+      border-radius: 4px;
+      border: 1px solid rgba(138,175,159,0.14);
+      border-left: 3px solid rgba(212,168,67,0.3);
+      overflow: hidden;
+    }
+    .child-card-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+      background: var(--deep-forest);
+      border-bottom: 1px solid rgba(138,175,159,0.1);
+    }
+    .child-card-title {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px;
+      text-transform: uppercase; color: var(--cream); letter-spacing: 0.5px;
+    }
+    .child-card-status {
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      color: var(--sage); font-weight: 500;
+    }
+    .child-card-status.complete { color: var(--gold); }
+    .child-card-body { padding: 16px; }
+
+    /* Clinic toggle inside child card */
+    .clinic-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+    .clinic-btn {
+      flex: 1; padding: 12px 8px; border-radius: 3px; cursor: pointer;
+      border: 1px solid rgba(138,175,159,0.18);
+      background: transparent; color: var(--sage);
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.15s; text-align: center; line-height: 1.3;
+    }
+    .clinic-btn:active { background: rgba(212,168,67,0.1); }
+    .clinic-btn.selected { background: rgba(212,168,67,0.12); border-color: var(--gold); color: var(--cream); }
+    .clinic-btn-age { display: block; font-size: 9px; color: var(--sage); font-weight: 500; letter-spacing: 1px; margin-top: 2px; }
+    .clinic-btn.selected .clinic-btn-age { color: var(--sage); }
+
+    /* Child name/age fields inside card */
+    .child-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .child-fields .form-group label { font-size: 10px; }
+    .child-fields .form-group input,
+    .child-fields .form-group select { padding: 12px 14px; font-size: 16px; }
+
+    /* Remove child button */
+    .btn-remove-child {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 12px;
+      color: rgba(138,175,159,0.4); padding: 0;
+      text-decoration: underline; margin-top: 12px;
+    }
+    .btn-remove-child:hover { color: #e57373; }
+
+    /* Add child button */
+    .btn-add-child {
+      width: 100%; padding: 14px;
+      background: none;
+      border: 1px dashed rgba(212,168,67,0.35);
+      border-radius: 4px; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); transition: border-color 0.2s, background 0.15s;
+      margin-bottom: 20px;
+    }
+    .btn-add-child:active { background: rgba(212,168,67,0.06); border-color: var(--gold); }
+
+    /* ── CALENDAR (inside child card) ── */
+    .cal-wrap { background: rgba(15,31,25,0.4); border-radius: 4px; border: 1px solid rgba(138,175,159,0.1); padding: 12px; margin-bottom: 8px; }
+    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .cal-month { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--cream); letter-spacing: 1px; }
+    .cal-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .cal-legend-item { display: flex; align-items: center; gap: 4px; font-family: 'Inter', sans-serif; font-size: 10px; color: var(--sage); }
+    .cal-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .cal-legend-dot.available { background: var(--gold); }
+    .cal-legend-dot.free-dot { background: var(--sage); }
+    .cal-legend-dot.grayed { background: rgba(138,175,159,0.15); }
+
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-day-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; text-align: center; color: var(--mid-green); padding: 3px 0 5px; }
+    .cal-cell { aspect-ratio: 1; border-radius: 3px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; position: relative; user-select: none; transition: background 0.15s; }
+    .cal-cell.empty { background: transparent; }
+    .cal-cell.inactive { color: rgba(138,175,159,0.15); background: transparent; cursor: default; }
+    .cal-cell.available { background: rgba(212,168,67,0.12); color: var(--cream); cursor: pointer; border: 1px solid rgba(212,168,67,0.2); }
+    .cal-cell.available:active { background: rgba(212,168,67,0.25); }
+    .cal-cell.free-day { background: rgba(138,175,159,0.1); color: var(--cream); cursor: pointer; border: 1px solid rgba(138,175,159,0.2); }
+    .cal-cell.sold-out { background: rgba(138,175,159,0.04); color: rgba(138,175,159,0.2); cursor: not-allowed; }
+    .cal-cell.selected { background: var(--gold) !important; color: var(--black) !important; border-color: transparent !important; outline: 2px solid var(--soft-gold); }
+    .cal-cell-sub { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 7px; line-height: 1; margin-top: 1px; }
+    .cal-cell.available .cal-cell-sub { color: var(--gold); }
+    .cal-cell.free-day .cal-cell-sub { color: var(--sage); }
+    .cal-cell.selected .cal-cell-sub { color: var(--black); }
+    .cal-cell.sold-out .cal-cell-sub { color: rgba(138,175,159,0.2); }
+
+    /* Selected sessions summary inside child card */
+    .child-sessions-summary { margin-top: 10px; }
+    .child-sessions-summary-title { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .child-session-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--deep-forest); border: 1px solid rgba(212,168,67,0.2);
+      border-radius: 3px; padding: 5px 10px; margin: 3px 3px 3px 0;
+      font-family: 'Inter', sans-serif; font-size: 12px; color: var(--cream);
+    }
+    .child-session-pill .pill-price { color: var(--gold); font-weight: 600; margin-left: 4px; }
+    .bundle-tag { display: inline-block; background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.3); border-radius: 2px; padding: 3px 8px; margin-top: 8px; font-family: 'Inter', sans-serif; font-size: 11px; color: var(--gold); }
+
+    /* ── STEP 3 — REVIEW + WAIVER ── */
+    .review-child-block {
+      background: var(--forest); border-radius: 4px;
+      border-left: 3px solid var(--gold);
+      border: 1px solid rgba(138,175,159,0.1);
+      border-left: 3px solid var(--gold);
+      padding: 14px 16px; margin-bottom: 12px;
+    }
+    .review-child-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--cream); margin-bottom: 4px; }
+    .review-child-clinic { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--sage); margin-bottom: 8px; }
+    .review-session-line { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--mid-green); line-height: 1.7; }
+
+    /* Policy + Waiver */
+    .policy-block { background: rgba(212,168,67,0.07); border: 1px solid rgba(212,168,67,0.2); border-radius: 4px; padding: 14px 16px; margin-bottom: 16px; }
+    .policy-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .policy-text { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--mid-green); line-height: 1.65; }
+    .waiver-block { background: var(--forest); border-radius: 4px; border: 1px solid rgba(138,175,159,0.12); border-left: 3px solid rgba(212,168,67,0.18); padding: 16px; margin-bottom: 16px; }
+    .waiver-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .waiver-points { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--sage); line-height: 1.75; margin-bottom: 14px; }
+    .waiver-points li { margin-bottom: 8px; padding-left: 6px; }
+
+    /* Checkboxes */
+    .check-row { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 4px 0; }
+    .custom-check { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; border: 2px solid rgba(138,175,159,0.35); appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; position: relative; transition: border-color 0.2s, background 0.2s; }
+    .custom-check:checked { background: var(--gold); border-color: var(--gold); }
+    .custom-check:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); color: var(--black); font-size: 13px; font-weight: 700; line-height: 1; }
+    .check-label { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--sage); line-height: 1.5; padding-top: 2px; }
+
+    /* ── PAYMENT METHOD SELECTOR ── */
+    .pay-method-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .pay-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .pay-option { display: flex; align-items: center; gap: 14px; background: var(--forest); border: 1px solid rgba(138,175,159,0.14); border-radius: 4px; padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .pay-option.selected { border-color: var(--gold); background: rgba(212,168,67,0.06); }
+    .pay-option input[type="radio"] { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+    .pay-option-text { flex: 1; }
+    .pay-option-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--cream); letter-spacing: 0.5px; }
+    .pay-option-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--sage); margin-top: 2px; line-height: 1.4; }
+    .pay-option-note { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--mid-green); font-style: italic; margin-top: 2px; }
+    .free-only-banner { background: rgba(138,175,159,0.08); border: 1px solid rgba(138,175,159,0.2); border-left: 3px solid var(--sage); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--sage); line-height: 1.6; }
+
+    /* ── SUCCESS PAYMENT ACTION CARD ── */
+    .pac-card { background: var(--forest); border-radius: 4px; border: 1px solid rgba(138,175,159,0.12); border-left: 3px solid var(--gold); padding: 20px; margin-bottom: 16px; text-align: left; }
+    .pac-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+
+    /* ── ORDER SUMMARY ── */
+    .order-summary { background: var(--forest); border-radius: 4px; border: 1px solid rgba(138,175,159,0.12); border-left: 3px solid var(--gold); padding: 18px; margin-bottom: 20px; }
+    .order-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .order-child-header { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; color: var(--cream); padding: 8px 0 4px; border-top: 1px solid rgba(138,175,159,0.1); margin-top: 8px; }
+    .order-child-header:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+    .order-line { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid rgba(138,175,159,0.06); }
+    .order-line:last-of-type { border-bottom: none; }
+    .order-line-label { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--sage); }
+    .order-line-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px; color: var(--cream); flex-shrink: 0; margin-left: 12px; }
+    .order-line.discount .order-line-val { color: var(--soft-gold); }
+    .order-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; margin-top: 8px; border-top: 2px solid rgba(212,168,67,0.2); }
+    .order-total-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); }
+    .order-total-val { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 30px; color: var(--gold); }
+
+    /* Stripe */
+    .stripe-wrap { background: var(--forest); border-radius: 4px; border: 1px solid rgba(138,175,159,0.18); padding: 16px; margin-bottom: 16px; }
+    .stripe-label { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--mid-green); margin-bottom: 10px; }
+    #card-errors { font-family: 'Inter', sans-serif; font-size: 13px; color: #e57373; margin-top: 10px; min-height: 18px; }
+    .secure-note { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; color: var(--mid-green); margin-bottom: 20px; }
+    .secure-note svg { width: 14px; height: 14px; stroke: var(--mid-green); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* ── BUTTONS ── */
+    .step-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .btn-next { width: 100%; background: var(--gold); color: var(--black); border: none; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; padding: 17px 24px; cursor: pointer; transition: background 0.2s; }
+    .btn-next:active:not(:disabled) { background: var(--soft-gold); }
+    .btn-next:disabled { opacity: 0.32; cursor: not-allowed; }
+    .btn-back { width: 100%; background: none; border: 1px solid rgba(61,107,90,0.3); color: var(--mid-green); border-radius: 3px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; padding: 14px 18px; cursor: pointer; text-align: center; }
+    .btn-back:active { border-color: var(--mid-green); }
+
+    #pay-btn { width: 100%; background: var(--gold); color: var(--black); border: none; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; padding: 18px 24px; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    #pay-btn:active:not(:disabled) { background: var(--soft-gold); }
+    #pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .pay-btn-spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(15,31,25,0.3); border-top-color: var(--black); border-radius: 50%; animation: spin 0.7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #pay-error { font-family: 'Inter', sans-serif; font-size: 13px; color: #e57373; margin-top: 10px; min-height: 18px; }
+
+    /* ── SUCCESS ── */
+    .success-screen { display: none; text-align: center; padding: 48px 0 64px; }
+    .success-screen.visible { display: block; }
+    .success-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--gold); color: var(--black); font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .success-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 44px; text-transform: uppercase; color: var(--forest); line-height: 0.92; margin-bottom: 14px; }
+    .success-headline .gold { color: var(--gold); }
+    .success-body { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--mid-green); line-height: 1.65; margin-bottom: 20px; }
+    .success-detail { background: var(--forest); border-radius: 4px; border-left: 3px solid var(--gold); padding: 16px; text-align: left; margin-bottom: 16px; }
+    .success-detail-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .success-detail-line { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--sage); line-height: 1.8; }
+    .success-contact { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--mid-green); line-height: 1.65; }
+    .success-contact a { color: var(--gold); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    .site-footer { background: var(--black); padding: 20px; text-align: center; }
+    .footer-text { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(138,175,159,0.5); line-height: 1.7; }
+    .footer-text a { color: var(--gold); text-decoration: none; }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 560px) {
+      .hero { padding: 40px 32px 44px; }
+      .hero-headline { font-size: 64px; }
+      .hero-facts { flex-direction: row; flex-wrap: wrap; gap: 10px 20px; }
+      .main { padding: 36px 24px 80px; }
+      .step-heading { font-size: 44px; }
+      .step-nav { flex-direction: row; }
+      .btn-back { width: auto; flex-shrink: 0; }
+      .btn-next { flex: 1; }
+      .clinic-toggle { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-mark">
+    <span class="logo-name">Soccer Clinics</span>
+    <span class="logo-sub">Oklahoma City</span>
+  </div>
+  <span class="header-badge">OKC</span>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Grand Mosque Field · OKC</p>
+  <h1 class="hero-headline">Soccer<br><span class="gold">Clinics OKC</span></h1>
+  <p class="hero-sub">Pick your sessions, pay once, and you're in. Takes under 2 minutes.</p>
+  <div class="hero-facts">
+    <span class="hero-fact"><span class="dot">⚽</span>Ages 4–12</span>
+    <span class="hero-fact"><span class="dot">📍</span>3201 NW 48th St, OKC</span>
+    <span class="hero-fact"><span class="dot">👨‍👩‍👧‍👦</span>Register multiple kids at once</span>
+    <span class="hero-fact"><span class="dot">✅</span>Instant confirmation</span>
+  </div>
+</section>
+
+<!-- Hidden form — Netlify reads this at deploy time to know what fields to capture -->
+<form name="clinic-registration" netlify netlify-honeypot="b_confirm" style="display:none;" data-netlify="true">
+  <input type="text" name="b_confirm" />
+  <input type="text" name="parentName" />
+  <input type="text" name="parentPhone" />
+  <input type="email" name="parentEmail" />
+  <input type="text" name="whatsapp" />
+  <input type="text" name="paymentMethod" />
+  <input type="text" name="totalDue" />
+  <input type="text" name="children" />
+  <input type="text" name="submittedAt" />
+</form>
+
+<main class="main">
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-steps">
+      <div class="progress-step"><div class="progress-dot active" id="dot1" onclick="navTo(1)">1</div><div class="progress-line" id="line1"></div></div>
+      <div class="progress-step"><div class="progress-dot" id="dot2" onclick="navTo(2)">2</div><div class="progress-line" id="line2"></div></div>
+      <div class="progress-step"><div class="progress-dot" id="dot3" onclick="navTo(3)">3</div><div class="progress-line" id="line3"></div></div>
+      <div class="progress-step"><div class="progress-dot" id="dot4" onclick="navTo(4)">4</div></div>
+    </div>
+    <div class="progress-labels">
+      <span class="progress-label active" id="lbl1">Your Info</span>
+      <span class="progress-label" id="lbl2">Children</span>
+      <span class="progress-label" id="lbl3">Review</span>
+      <span class="progress-label" id="lbl4">Pay</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 1 — PARENT INFO
+  ══════════════════════════════════════ -->
+  <div class="step-panel active" id="step1">
+    <h2 class="step-heading">Your <span class="gold">info.</span></h2>
+    <p class="step-sub">Entered once — covers all children you register today.</p>
+
+    <div class="multi-notice">
+      <strong>Registering more than one child?</strong> No problem — you'll add each child on the next screen. One checkout covers everyone.
+    </div>
+
+    <!-- Honeypot — hidden from real users, bots fill it in and get blocked -->
+    <div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+      <label for="b_confirm">Leave this blank</label>
+      <input type="text" id="b_confirm" name="b_confirm" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="fields-stack">
+      <div class="form-group">
+        <label for="parentName">Full name</label>
+        <input type="text" id="parentName" placeholder="Your name" autocomplete="name" />
+        <p class="field-error">Please enter your name.</p>
+      </div>
+      <div class="form-group">
+        <label for="parentPhone">Phone number</label>
+        <input type="tel" id="parentPhone" placeholder="(555) 000-0000" autocomplete="tel" />
+        <p class="field-error">Please enter your phone number.</p>
+      </div>
+      <div class="form-group">
+        <label for="parentEmail">Email address</label>
+        <input type="email" id="parentEmail" placeholder="you@example.com" autocomplete="email" />
+        <p class="field-error">Please enter a valid email.</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <label class="check-row">
+        <input type="checkbox" class="custom-check" id="whatsappCheck" />
+        <span class="check-label">Send me session updates via WhatsApp. <span style="color:var(--mid-green);font-size:12px;">(Save +1 551 221 4840 in your contacts first.)</span></span>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-next" onclick="goTo(2)">Next — Add Children →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 2 — CHILDREN
+  ══════════════════════════════════════ -->
+  <div class="step-panel" id="step2">
+    <h2 class="step-heading">Add your <span class="gold">children.</span></h2>
+    <p class="step-sub">Each child picks their own clinic and sessions. Discounts apply per child.</p>
+
+    <div class="child-cards" id="childCards"></div>
+
+    <button class="btn-add-child" onclick="addChild()">+ Add Another Child</button>
+
+    <div class="step-nav">
+      <button class="btn-next" id="nextBtn2" onclick="goTo(3)" disabled>Next — Review →</button>
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 3 — REVIEW + WAIVER
+  ══════════════════════════════════════ -->
+  <div class="step-panel" id="step3">
+    <h2 class="step-heading">Review &amp; <span class="gold">agree.</span></h2>
+    <p class="step-sub">Confirm your registrations, then read and agree below.</p>
+
+    <div id="reviewBlocks"></div>
+
+    <hr class="field-divider" />
+
+    <div class="policy-block" style="margin-bottom:16px;">
+      <p class="policy-title">⚠️ Cancellation Policy</p>
+      <p class="policy-text">
+        You'll be confirmed by <strong style="color:var(--forest);">12 PM on the day of each session</strong>. Sessions need at least 5 players to run.<br><br>
+        Cancel 24+ hours ahead → full refund.<br>
+        Cancel within 24 hours → no refund.<br>
+        We cancel (low numbers) → full refund or transfer, your choice.
+      </p>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label class="check-row">
+        <input type="checkbox" class="custom-check" id="policyCheck" onchange="checkStep3()" />
+        <span class="check-label">I understand the cancellation policy.</span>
+      </label>
+    </div>
+
+    <div class="waiver-block">
+      <p class="waiver-title">📋 Participant Waiver &amp; Release of Liability</p>
+      <p style="font-family:'Inter',sans-serif;font-size:12px;color:var(--sage);margin-bottom:12px;line-height:1.6;">By submitting this form, I acknowledge and agree to the following:</p>
+      <ol class="waiver-points" style="padding-left:18px;">
+        <li><strong style="color:var(--cream);">Voluntary Participation</strong> — I understand that soccer involves physical risk and I enroll my child(ren) voluntarily with full knowledge of those risks.</li>
+        <li><strong style="color:var(--cream);">Release of Liability</strong> — I release Path to 90, its coaches, volunteers, and affiliates from any and all liability for injuries, accidents, or damages that may occur during participation in any clinic or training session.</li>
+        <li><strong style="color:var(--cream);">Medical Authorization</strong> — In the event of an emergency, I authorize Path to 90 staff to seek appropriate medical attention for my child(ren) if I cannot be reached. I agree to be responsible for any related medical expenses.</li>
+        <li><strong style="color:var(--cream);">Photo &amp; Media Release</strong> — I give permission for photos and videos taken during sessions to be used on Path to 90's social media channels and promotional materials, without compensation.</li>
+      </ol>
+      <label class="check-row" style="margin-top:14px;">
+        <input type="checkbox" class="custom-check" id="waiverCheck" onchange="checkStep3()" />
+        <span class="check-label">I have read and agree to the waiver above on behalf of my child(ren).</span>
+      </label>
+    </div>
+
+    <div class="step-nav">
+      <button class="btn-next" id="nextBtn3" onclick="goTo(4)" disabled>Next — Payment →</button>
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STEP 4 — PAYMENT
+  ══════════════════════════════════════ -->
+  <div class="step-panel" id="step4">
+    <h2 class="step-heading">Almost <span class="gold">there.</span></h2>
+    <p class="step-sub" id="step4Sub">Choose how you'll pay, then submit your registration.</p>
+
+    <div class="order-summary">
+      <p class="order-title">Order Summary</p>
+      <div id="orderLines"></div>
+      <div class="order-total">
+        <span class="order-total-label">Total</span>
+        <span class="order-total-val" id="orderTotal">—</span>
+      </div>
+    </div>
+
+    <!-- Payment method selector — hidden when total is $0 -->
+    <div id="payMethodSection">
+      <p class="pay-method-label">How will you pay?</p>
+      <div class="pay-options">
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="Venmo" onchange="checkPayMethod()" />
+          <div class="pay-option-text">
+            <div class="pay-option-name">Venmo</div>
+            <div class="pay-option-desc">You'll see the handle on the next screen.</div>
+          </div>
+        </label>
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="CashApp" onchange="checkPayMethod()" />
+          <div class="pay-option-text">
+            <div class="pay-option-name">CashApp</div>
+            <div class="pay-option-desc">You'll see the $cashtag on the next screen.</div>
+          </div>
+        </label>
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="Apple Pay" onchange="checkPayMethod()" />
+          <div class="pay-option-text">
+            <div class="pay-option-name">Apple Pay</div>
+            <div class="pay-option-desc">You'll see the phone number to send to.</div>
+          </div>
+        </label>
+        <label class="pay-option">
+          <input type="radio" name="payMethod" value="Cash" onchange="checkPayMethod()" />
+          <div class="pay-option-text">
+            <div class="pay-option-name">Cash</div>
+            <div class="pay-option-desc">Pay Coach Abou in person before the session.</div>
+            <div class="pay-option-note">⚠️ You must text Coach Abou immediately after submitting to confirm your cash spot — otherwise your registration is not complete.</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Free session message — shown when total is $0 -->
+    <div class="free-only-banner" id="freeOnlyBanner" style="display:none;">
+      Your selected session(s) are <strong>FREE</strong> — no payment needed. Just submit to lock in your spot.
+    </div>
+
+    <button id="pay-btn" disabled onclick="handlePayment()">
+      <span id="pay-btn-label">Submit Registration</span>
+      <div class="pay-btn-spinner" id="pay-spinner"></div>
+    </button>
+    <p id="pay-error"></p>
+
+    <div class="step-nav" style="margin-top:14px;">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2 class="success-headline">Form <span class="gold">received.</span></h2>
+    <p class="success-body">Check your email — payment instructions are on their way to your inbox. <strong style="color:var(--forest);">Your spot is not confirmed until payment is complete.</strong></p>
+
+    <!-- Email sent confirmation — shown for all paid methods except Cash -->
+    <div class="pac-card" id="pacCard" style="display:none;">
+      <p class="pac-eyebrow">Next step</p>
+      <p style="font-family:'Inter',sans-serif;font-size:15px;color:var(--cream);line-height:1.65;margin:0;">
+        Open the email we just sent to <strong id="pacEmail"></strong> — it has the exact amount you owe and how to send it.<br><br>
+        <span style="color:var(--sage);font-size:13px;">Once Coach Abou receives payment, he'll confirm your spot by text.</span>
+      </p>
+    </div>
+
+    <!-- Cash-specific urgent action -->
+    <div id="cashUrgentBanner" style="display:none;background:rgba(229,115,115,0.1);border:1px solid rgba(229,115,115,0.3);border-left:3px solid #e57373;border-radius:4px;padding:14px 16px;margin-bottom:16px;font-family:'Inter',sans-serif;font-size:14px;color:#e57373;line-height:1.6;text-align:left;">
+      <strong>Cash — text Coach Abou right now.</strong><br>
+      Your registration is <strong>not confirmed</strong> until you text Coach Abou at <a href="sms:+15512214840" style="color:#e57373;">+1 551 221 4840</a> to arrange your cash payment. Don't wait — spots are limited.
+    </div>
+
+    <!-- Free session confirmation -->
+    <div class="free-only-banner" id="freeSuccessBanner" style="display:none;">
+      Your session is <strong>FREE</strong> — your spot is locked in. Coach Abou will confirm by 12 PM on the day.
+    </div>
+
+    <div class="success-detail">
+      <p class="success-detail-title">What you registered</p>
+      <p class="success-detail-line" id="successDetails">—</p>
+    </div>
+    <p class="success-contact">
+      Questions? Text Coach Abou at <a href="tel:+15512214840">+1 551 221 4840</a><br>
+      or email <a href="mailto:p90training@gmail.com">p90training@gmail.com</a>
+    </p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-text">
+    Soccer Clinics OKC · Grand Mosque Field · 3201 NW 48th St, OKC<br>
+    <a href="mailto:p90training@gmail.com">p90training@gmail.com</a> · +1 551 221 4840
+  </p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+//  CONFIG — payment handles sent via Zapier email, not shown on page
+// ─────────────────────────────────────────────
+
+// ─────────────────────────────────────────────
+//  SESSION DATA
+// ─────────────────────────────────────────────
+// Verified against actual 2026 calendar:
+// Wednesdays in July 2026: 1, 8, 15, 22, 29
+// Mondays    in July 2026: 6, 13, 20, 27
+const SESSIONS = {
+  mini: {
+    name: 'Mini Clinic',
+    label: 'Mini · Ages 4–6',
+    ages: [4, 5, 6],
+    time: '6:00 – 6:45 PM',
+    days: 'Wednesdays',
+    singlePrice: 20,
+    bundlePrice: 35,
+    bundleSavings: 5,
+    slots: [
+      { id: 'mini-jul1',  day: 'Wed', date: 'July 1',  dayNum: 1,  free: true,  soldOut: false },
+      { id: 'mini-jul8',  day: 'Wed', date: 'July 8',  dayNum: 8,  free: false, soldOut: false },
+      { id: 'mini-jul15', day: 'Wed', date: 'July 15', dayNum: 15, free: false, soldOut: false },
+      { id: 'mini-jul22', day: 'Wed', date: 'July 22', dayNum: 22, free: false, soldOut: false },
+      { id: 'mini-jul29', day: 'Wed', date: 'July 29', dayNum: 29, free: false, soldOut: false },
+    ]
+  },
+  youth: {
+    name: 'Youth Clinic',
+    label: 'Youth · Ages 7–12',
+    ages: [7, 8, 9, 10, 11, 12],
+    time: '7:00 – 8:00 PM',
+    days: 'Mon & Wed',
+    singlePrice: 25,
+    bundlePrice: 40,
+    bundleSavings: 10,
+    slots: [
+      { id: 'youth-jul1',  day: 'Wed', date: 'July 1',  dayNum: 1,  free: false, soldOut: false },
+      { id: 'youth-jul6',  day: 'Mon', date: 'July 6',  dayNum: 6,  free: false, soldOut: false },
+      { id: 'youth-jul8',  day: 'Wed', date: 'July 8',  dayNum: 8,  free: false, soldOut: false },
+      { id: 'youth-jul13', day: 'Mon', date: 'July 13', dayNum: 13, free: false, soldOut: false },
+      { id: 'youth-jul15', day: 'Wed', date: 'July 15', dayNum: 15, free: false, soldOut: false },
+      { id: 'youth-jul20', day: 'Mon', date: 'July 20', dayNum: 20, free: false, soldOut: false },
+      { id: 'youth-jul22', day: 'Wed', date: 'July 22', dayNum: 22, free: false, soldOut: false },
+      { id: 'youth-jul27', day: 'Mon', date: 'July 27', dayNum: 27, free: false, soldOut: false },
+      { id: 'youth-jul29', day: 'Wed', date: 'July 29', dayNum: 29, free: false, soldOut: false },
+    ]
+  }
+};
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+// children = [{ id, name, age, clinic, slots:[] }, ...]
+let children = [];
+let childCounter = 0;
+let totalDollars = 0;
+
+// ─────────────────────────────────────────────
+//  STEP 1 — PARENT VALIDATION
+// ─────────────────────────────────────────────
+function validateStep1() {
+  let valid = true;
+  const checks = [
+    { id: 'parentName',  fn: v => v.trim().length > 1 },
+    { id: 'parentPhone', fn: v => v.trim().length > 6 },
+    { id: 'parentEmail', fn: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+  ];
+  checks.forEach(c => {
+    const el = document.getElementById(c.id);
+    const grp = el.closest('.form-group');
+    if (!c.fn(el.value)) { grp.classList.add('has-error'); valid = false; }
+    else grp.classList.remove('has-error');
+  });
+  return valid;
+}
+
+// ─────────────────────────────────────────────
+//  STEP 2 — CHILD MANAGEMENT
+// ─────────────────────────────────────────────
+function addChild() {
+  childCounter++;
+  const id = 'child-' + childCounter;
+  children.push({ id, name: '', age: '', clinic: null, slots: [] });
+  renderChildCards();
+  // scroll to the new card
+  setTimeout(() => {
+    const el = document.getElementById('card-' + id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function removeChild(id) {
+  children = children.filter(c => c.id !== id);
+  renderChildCards();
+  checkStep2();
+}
+
+function setClinic(childId, clinicType) {
+  const child = children.find(c => c.id === childId);
+  if (!child) return;
+  child.clinic = clinicType;
+  child.slots = []; // reset slots when switching clinic
+  renderChildCards();
+  checkStep2();
+}
+
+function toggleChildSlot(childId, slotId) {
+  const child = children.find(c => c.id === childId);
+  if (!child || !child.clinic) return;
+  const slot = SESSIONS[child.clinic].slots.find(s => s.id === slotId);
+  if (!slot || slot.soldOut) return;
+
+  const idx = child.slots.indexOf(slotId);
+  if (idx === -1) child.slots.push(slotId);
+  else child.slots.splice(idx, 1);
+
+  // re-render just the calendar and summary for this child
+  renderCalendarForChild(childId);
+  renderSessionSummaryForChild(childId);
+  checkStep2();
+}
+
+function updateChildField(childId, field, value) {
+  const child = children.find(c => c.id === childId);
+  if (child) child[field] = value;
+  checkStep2();
+  // update card status label
+  updateCardStatus(childId);
+}
+
+function isChildComplete(child) {
+  return child.name.trim().length > 1 &&
+         child.age !== '' &&
+         child.clinic !== null &&
+         child.slots.length > 0;
+}
+
+function checkStep2() {
+  const allDone = children.length > 0 && children.every(isChildComplete);
+  document.getElementById('nextBtn2').disabled = !allDone;
+}
+
+function updateCardStatus(childId) {
+  const child = children.find(c => c.id === childId);
+  const el = document.getElementById('status-' + childId);
+  if (!el || !child) return;
+  if (isChildComplete(child)) {
+    el.textContent = '✓ Complete';
+    el.className = 'child-card-status complete';
+  } else {
+    el.textContent = 'Incomplete';
+    el.className = 'child-card-status';
+  }
+}
+
+// ─────────────────────────────────────────────
+//  RENDER CHILD CARDS
+// ─────────────────────────────────────────────
+function renderChildCards() {
+  const container = document.getElementById('childCards');
+  container.innerHTML = '';
+  children.forEach((child, idx) => {
+    const card = document.createElement('div');
+    card.className = 'child-card';
+    card.id = 'card-' + child.id;
+
+    const isComplete = isChildComplete(child);
+    const statusText = isComplete ? '✓ Complete' : 'Incomplete';
+    const statusClass = isComplete ? 'child-card-status complete' : 'child-card-status';
+
+    // Age options for current clinic (or all if none selected yet)
+    const ageOptions = child.clinic
+      ? SESSIONS[child.clinic].ages
+      : [4,5,6,7,8,9,10,11,12];
+
+    card.innerHTML = `
+      <div class="child-card-header">
+        <span class="child-card-title">Child ${idx + 1}</span>
+        <span class="${statusClass}" id="status-${child.id}">${statusText}</span>
+      </div>
+      <div class="child-card-body">
+
+        <!-- Clinic toggle -->
+        <div style="margin-bottom:12px;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Which clinic?</div>
+          <div class="clinic-toggle">
+            <button class="clinic-btn ${child.clinic === 'mini' ? 'selected' : ''}"
+              onclick="setClinic('${child.id}', 'mini')">
+              Mini Clinic<span class="clinic-btn-age">Ages 4–6 · Wed</span>
+            </button>
+            <button class="clinic-btn ${child.clinic === 'youth' ? 'selected' : ''}"
+              onclick="setClinic('${child.id}', 'youth')">
+              Youth Clinic<span class="clinic-btn-age">Ages 7–12 · Mon &amp; Wed</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Name + Age -->
+        <div class="child-fields">
+          <div class="form-group">
+            <label>Child's name</label>
+            <input type="text" id="name-${child.id}" value="${child.name}"
+              placeholder="First and last name"
+              oninput="updateChildField('${child.id}', 'name', this.value)" />
+          </div>
+          <div class="form-group">
+            <label>Child's age</label>
+            <select id="age-${child.id}" onchange="updateChildField('${child.id}', 'age', this.value)">
+              <option value="" disabled ${!child.age ? 'selected' : ''}>Select age</option>
+              ${ageOptions.map(a => `<option value="${a}" ${child.age == a ? 'selected' : ''}>${a} years old</option>`).join('')}
+            </select>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div id="cal-wrap-${child.id}">
+          ${child.clinic ? buildCalendarHTML(child) : '<p style="font-family:Inter,sans-serif;font-size:13px;color:rgba(138,175,159,0.4);font-style:italic;padding:4px 0;">Select a clinic above to see available sessions.</p>'}
+        </div>
+
+        <!-- Session summary -->
+        <div id="summary-${child.id}">
+          ${child.clinic && child.slots.length > 0 ? buildSessionSummaryHTML(child) : ''}
+        </div>
+
+        ${children.length > 1 ? `<button class="btn-remove-child" onclick="removeChild('${child.id}')">Remove this child</button>` : ''}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderCalendarForChild(childId) {
+  const child = children.find(c => c.id === childId);
+  const el = document.getElementById('cal-wrap-' + childId);
+  if (!el || !child || !child.clinic) return;
+  el.innerHTML = buildCalendarHTML(child);
+}
+
+function renderSessionSummaryForChild(childId) {
+  const child = children.find(c => c.id === childId);
+  const el = document.getElementById('summary-' + childId);
+  if (!el || !child) return;
+  el.innerHTML = child.slots.length > 0 ? buildSessionSummaryHTML(child) : '';
+}
+
+// ─────────────────────────────────────────────
+//  CALENDAR HTML BUILDER
+// ─────────────────────────────────────────────
+function buildCalendarHTML(child) {
+  const cfg = SESSIONS[child.clinic];
+
+  // Build slot map keyed by day number
+  const slotMap = {};
+  cfg.slots.forEach(s => { slotMap[s.dayNum] = s; });
+
+  // July 2026: starts Wednesday (JS getDay() = 3), 31 days
+  const YEAR = 2026, MONTH = 6; // JS: month 6 = July
+  const firstDay = new Date(YEAR, MONTH, 1).getDay(); // = 3 (Wednesday)
+  const daysInMonth = new Date(YEAR, MONTH + 1, 0).getDate(); // = 31
+
+  // Rolling 30-day window: hide days before today (show as past/inactive)
+  const today = new Date();
+  const todayDay = (today.getFullYear() === YEAR && today.getMonth() === MONTH)
+    ? today.getDate()
+    : (today < new Date(YEAR, MONTH, 1) ? 0 : 99); // 0 = show all; 99 = hide all
+
+  // Cut-off: only show 30 days from today (or from day 1 if before July)
+  const windowStart = Math.max(1, todayDay);
+  const windowEnd   = windowStart + 29; // 30 days inclusive
+
+  const dayLabels = ['S','M','T','W','T','F','S'];
+
+  let legend = `<div class="cal-legend">
+    <div class="cal-legend-item"><div class="cal-legend-dot available"></div> Available</div>`;
+  if (child.clinic === 'mini') {
+    legend += `<div class="cal-legend-item"><div class="cal-legend-dot free-dot"></div> Free</div>`;
+  }
+  legend += `<div class="cal-legend-item"><div class="cal-legend-dot grayed"></div> No clinic</div></div>`;
+
+  let grid = `<div class="cal-grid">`;
+  dayLabels.forEach(d => { grid += `<div class="cal-day-label">${d}</div>`; });
+  for (let i = 0; i < firstDay; i++) { grid += `<div class="cal-cell empty"></div>`; }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const slot = slotMap[d];
+    const isPast    = d < windowStart;
+    const isOutside = d > windowEnd;
+
+    if (isPast || isOutside) {
+      // Gray out days outside the 30-day window
+      grid += `<div class="cal-cell inactive" style="opacity:${isPast ? '0.18' : '0.25'}">${d}</div>`;
+    } else if (slot) {
+      let cls = slot.soldOut ? 'sold-out' : slot.free ? 'free-day' : 'available';
+      if (child.slots.includes(slot.id)) cls += ' selected';
+      const sub = slot.soldOut ? 'FULL' : slot.free ? 'FREE' : `$${cfg.singlePrice}`;
+      const click = slot.soldOut ? '' : `onclick="toggleChildSlot('${child.id}','${slot.id}')"`;
+      grid += `<div class="cal-cell ${cls}" ${click}>${d}<div class="cal-cell-sub">${sub}</div></div>`;
+    } else {
+      grid += `<div class="cal-cell inactive">${d}</div>`;
+    }
+  }
+  grid += `</div>`;
+
+  return `<div class="cal-wrap">
+    <div class="cal-header">
+      <span class="cal-month">July 2026</span>
+      <span style="font-family:'Inter',sans-serif;font-size:11px;color:var(--sage);">${cfg.time}</span>
+    </div>
+    ${legend}${grid}
+  </div>`;
+}
+
+// ─────────────────────────────────────────────
+//  SESSION SUMMARY HTML BUILDER
+// ─────────────────────────────────────────────
+function buildSessionSummaryHTML(child) {
+  const cfg = SESSIONS[child.clinic];
+  const ordered = cfg.slots.filter(s => child.slots.includes(s.id));
+  const paidCount = ordered.filter(s => !s.free).length;
+  const bundleActive = paidCount >= 2;
+
+  let html = `<div class="child-sessions-summary"><div class="child-sessions-summary-title">Selected sessions</div>`;
+  ordered.forEach(s => {
+    html += `<div class="child-session-pill">${s.day} ${s.date}<span class="pill-price">${s.free ? 'FREE' : '$' + cfg.singlePrice}</span></div>`;
+  });
+  if (bundleActive) {
+    html += `<div class="bundle-tag">🟡 Bundle discount — saving $${cfg.bundleSavings}</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+// ─────────────────────────────────────────────
+//  CHILD PRICING CALC
+// ─────────────────────────────────────────────
+function calcChildTotal(child) {
+  if (!child.clinic) return 0;
+  const cfg = SESSIONS[child.clinic];
+  const paidSlots = child.slots
+    .map(id => cfg.slots.find(s => s.id === id))
+    .filter(s => s && !s.free);
+  if (paidSlots.length >= 2) {
+    return cfg.bundlePrice + Math.max(0, paidSlots.length - 2) * cfg.singlePrice;
+  }
+  return paidSlots.length * cfg.singlePrice;
+}
+
+// ─────────────────────────────────────────────
+//  STEP 3 — REVIEW
+// ─────────────────────────────────────────────
+function buildReview() {
+  const container = document.getElementById('reviewBlocks');
+  container.innerHTML = '';
+  children.forEach(child => {
+    const cfg = SESSIONS[child.clinic];
+    const ordered = cfg.slots.filter(s => child.slots.includes(s.id));
+    const childTotal = calcChildTotal(child);
+    const paidCount = ordered.filter(s => !s.free).length;
+    const bundleActive = paidCount >= 2;
+
+    let sessionsHtml = ordered.map(s =>
+      `${s.day} ${s.date} · ${cfg.time} — <strong style="color:var(--gold)">${s.free ? 'FREE' : '$' + cfg.singlePrice}</strong>`
+    ).join('<br>');
+    if (bundleActive) {
+      sessionsHtml += `<br><span style="color:var(--soft-gold);font-size:12px;">Bundle discount applied — saving $${cfg.bundleSavings}</span>`;
+    }
+
+    const block = document.createElement('div');
+    block.className = 'review-child-block';
+    block.innerHTML = `
+      <div class="review-child-name">${child.name}, age ${child.age}</div>
+      <div class="review-child-clinic">${cfg.name} · ${cfg.days}</div>
+      <div class="review-session-line">${sessionsHtml}</div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+function checkStep3() {
+  const ok = document.getElementById('policyCheck').checked && document.getElementById('waiverCheck').checked;
+  document.getElementById('nextBtn3').disabled = !ok;
+}
+
+// ─────────────────────────────────────────────
+//  STEP 4 — ORDER SUMMARY + PAYMENT METHOD
+// ─────────────────────────────────────────────
+function buildOrderSummary() {
+  const container = document.getElementById('orderLines');
+  container.innerHTML = '';
+  totalDollars = 0;
+
+  children.forEach(child => {
+    const cfg = SESSIONS[child.clinic];
+    const ordered = cfg.slots.filter(s => child.slots.includes(s.id));
+    const paidSlots = ordered.filter(s => !s.free);
+    const bundleActive = paidSlots.length >= 2;
+    const childTotal = calcChildTotal(child);
+    totalDollars += childTotal;
+
+    let html = `<div class="order-child-header">${child.name} — ${cfg.name}</div>`;
+    ordered.forEach(s => {
+      html += `<div class="order-line">
+        <span class="order-line-label">${s.day} ${s.date}</span>
+        <span class="order-line-val">${s.free ? 'FREE' : '$' + cfg.singlePrice}</span>
+      </div>`;
+    });
+    if (bundleActive) {
+      const savings = paidSlots.length * cfg.singlePrice - childTotal;
+      html += `<div class="order-line discount">
+        <span class="order-line-label">Bundle discount</span>
+        <span class="order-line-val">−$${savings}</span>
+      </div>`;
+    }
+    container.innerHTML += html;
+  });
+
+  document.getElementById('orderTotal').textContent = totalDollars === 0 ? 'FREE' : '$' + totalDollars;
+
+  const isFree = totalDollars === 0;
+  document.getElementById('payMethodSection').style.display = isFree ? 'none' : 'block';
+  document.getElementById('freeOnlyBanner').style.display  = isFree ? 'block' : 'none';
+
+  // Reset payment method selection
+  document.querySelectorAll('input[name="payMethod"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.pay-option').forEach(o => o.classList.remove('selected'));
+
+  if (isFree) {
+    document.getElementById('pay-btn').disabled = false;
+    document.getElementById('step4Sub').textContent = 'Your sessions are free — just hit submit to lock in your spot.';
+  } else {
+    document.getElementById('pay-btn').disabled = true;
+    document.getElementById('step4Sub').textContent = "Choose how you'll pay, then submit your registration.";
+  }
+}
+
+function checkPayMethod() {
+  const selected = document.querySelector('input[name="payMethod"]:checked');
+  // Update visual state on all options
+  document.querySelectorAll('.pay-option').forEach(opt => {
+    const radio = opt.querySelector('input[type="radio"]');
+    opt.classList.toggle('selected', radio && radio.checked);
+  });
+  document.getElementById('pay-btn').disabled = !selected;
+}
+
+// ─────────────────────────────────────────────
+//  SUBMIT — Google Apps Script + success screen
+// ─────────────────────────────────────────────
+async function handlePayment() {
+  const btn     = document.getElementById('pay-btn');
+  const spinner = document.getElementById('pay-spinner');
+  const label   = document.getElementById('pay-btn-label');
+  const errEl   = document.getElementById('pay-error');
+  errEl.textContent = '';
+  btn.disabled = true; spinner.style.display = 'block'; label.style.display = 'none';
+
+  // Honeypot check — bots fill this field, humans never see it
+  if (document.getElementById('b_confirm').value !== '') {
+    // Fake success — bot thinks it worked, nothing is submitted
+    showSuccess('Venmo');
+    return;
+  }
+
+  const payMethod   = document.querySelector('input[name="payMethod"]:checked')?.value || 'Free';
+  const parentName  = document.getElementById('parentName').value;
+  const parentPhone = document.getElementById('parentPhone').value;
+  const parentEmail = document.getElementById('parentEmail').value;
+  const whatsapp    = document.getElementById('whatsappCheck').checked ? 'Yes' : 'No';
+
+  const childrenData = children.map(child => {
+    const cfg = SESSIONS[child.clinic];
+    const ordered = cfg.slots.filter(s => child.slots.includes(s.id));
+    return {
+      name:     child.name,
+      age:      child.age,
+      clinic:   cfg.name,
+      sessions: ordered.map(s => `${s.day} ${s.date}`).join(', '),
+      total:    calcChildTotal(child),
+    };
+  });
+
+  const payload = {
+    parentName, parentPhone, parentEmail, whatsapp,
+    paymentMethod: payMethod,
+    totalDue: totalDollars,
+    children: childrenData,
+    submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }),
+  };
+
+  try {
+    // Submit to Netlify Forms
+    const formData = new FormData();
+    formData.append('form-name', 'clinic-registration');
+    formData.append('b_confirm', document.getElementById('b_confirm').value);
+    formData.append('parentName',     payload.parentName);
+    formData.append('parentPhone',    payload.parentPhone);
+    formData.append('parentEmail',    payload.parentEmail);
+    formData.append('whatsapp',       payload.whatsapp);
+    formData.append('paymentMethod',  payload.paymentMethod);
+    formData.append('totalDue',       payload.totalDue);
+    formData.append('children',       JSON.stringify(payload.children));
+    formData.append('submittedAt',    payload.submittedAt);
+
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString(),
+    });
+  } catch (e) {
+    // Swallow network errors — form may still have been received
+  }
+
+  showSuccess(payMethod);
+}
+
+// ─────────────────────────────────────────────
+//  SUCCESS
+// ─────────────────────────────────────────────
+function showSuccess(payMethod) {
+  document.getElementById('progressWrap').style.display = 'none';
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('successScreen').classList.add('visible');
+
+  const isFree = totalDollars === 0;
+
+  if (!isFree) {
+    if (payMethod === 'Cash') {
+      document.getElementById('cashUrgentBanner').style.display = 'block';
+    } else {
+      // Show "check your email" card with parent's email address
+      document.getElementById('pacCard').style.display = 'block';
+      document.getElementById('pacEmail').textContent = document.getElementById('parentEmail').value;
+    }
+  } else {
+    document.getElementById('freeSuccessBanner').style.display = 'block';
+  }
+
+  let details = '';
+  children.forEach(child => {
+    const cfg = SESSIONS[child.clinic];
+    const lines = cfg.slots
+      .filter(s => child.slots.includes(s.id))
+      .map(s => `${s.day} ${s.date} · ${cfg.time}`)
+      .join(', ');
+    details += `<strong style="color:var(--cream);">${child.name}</strong> — ${cfg.name}: ${lines}<br>`;
+  });
+  details += `<br>📍 Grand Mosque Field · 3201 NW 48th St, OKC<br>You'll be confirmed by 12 PM on each session day.`;
+
+  document.getElementById('successDetails').innerHTML = details;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─────────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────────
+
+// navTo: called by clicking a progress dot — only allows going BACK (to a done step)
+function navTo(step) {
+  const dot = document.getElementById('dot' + step);
+  if (!dot || !dot.classList.contains('done')) return; // only navigate to completed steps
+  goTo(step);
+}
+
+function goTo(step) {
+  // validate step 1 before leaving
+  if (step === 2 && !validateStep1()) return;
+
+  if (step === 2) {
+    // initialize with one child card if empty
+    if (children.length === 0) addChild();
+    else renderChildCards();
+  }
+
+  if (step === 3) {
+    // reset checkboxes when coming back
+    document.getElementById('policyCheck').checked = false;
+    document.getElementById('waiverCheck').checked = false;
+    document.getElementById('nextBtn3').disabled = true;
+    buildReview();
+  }
+
+  if (step === 4) {
+    buildOrderSummary();
+  }
+
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+
+  for (let i = 1; i <= 4; i++) {
+    const dot  = document.getElementById('dot' + i);
+    const lbl  = document.getElementById('lbl' + i);
+    const line = document.getElementById('line' + i);
+    if (i < step) {
+      dot.className = 'progress-dot done'; lbl.className = 'progress-label done';
+      if (line) line.className = 'progress-line done';
+    } else if (i === step) {
+      dot.className = 'progress-dot active'; lbl.className = 'progress-label active';
+      if (line) line.className = 'progress-line';
+    } else {
+      dot.className = 'progress-dot'; lbl.className = 'progress-label';
+      if (line) line.className = 'progress-line';
+    }
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
