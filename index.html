@@ -1720,6 +1720,21 @@ function goTo(step) {
 
 // Load any saved "Remember me" profile from this browser, if the parent opted in previously
 loadSavedProfile();
+
+// ─────────────────────────────────────────────
+//  DIRECT-REGISTER SHORTCUT LINK
+//  ?register=1 (or ?register=mini / ?register=youth) skips the welcome page
+//  and jumps straight into the booking flow — for recurring parents who
+//  already know the clinics, shared via WhatsApp/text rather than the flyer.
+//  The plain link (no params) still shows the welcome page as normal.
+// ─────────────────────────────────────────────
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('register')) return;
+  const val = params.get('register');
+  const clinic = (val === 'mini' || val === 'youth') ? val : null;
+  startRegistration(clinic);
+})();
 </script>
 </body>
 </html>
