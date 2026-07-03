@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v2 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,7 +7,7 @@
   <title>Soccer Clinics OKC — Sign Up</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -24,25 +25,13 @@
 
     body { background: var(--cream); font-family: 'Inter', sans-serif; color: var(--forest); -webkit-font-smoothing: antialiased; min-height: 100vh; }
 
-    /* ── HEADER ── */
-    .site-header { background: var(--forest); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+    /* ── HEADER — cream, no forest green anywhere, no separator line ── */
     .logo-mark { display: flex; flex-direction: column; line-height: 1; }
-    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 1px; color: var(--cream); text-transform: uppercase; }
-    .logo-sub { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-top: 1px; }
-    .header-badge { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 5px 12px; border-radius: 2px; }
-
-    /* ── HERO ── */
-    .hero { background: var(--forest); padding: 28px 20px 32px; border-bottom: 3px solid var(--gold); }
-    .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .hero-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 48px; line-height: 0.9; text-transform: uppercase; color: var(--cream); margin-bottom: 10px; }
-    .hero-headline .gold { color: var(--gold); }
-    .hero-sub { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--sage); line-height: 1.55; margin-bottom: 18px; }
-    .hero-facts { display: flex; flex-direction: column; gap: 6px; }
-    .hero-fact { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--sage); }
-    .hero-fact .dot { color: var(--gold); margin-right: 6px; }
+    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: 1px; color: var(--forest); text-transform: uppercase; }
+    .logo-sub { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 3px; color: var(--mid-green); text-transform: uppercase; margin-top: 1px; }
 
     /* ── MAIN ── */
-    .main { max-width: 640px; margin: 0 auto; padding: 28px 16px 72px; }
+    .main { max-width: 640px; margin: 0 auto; padding: 28px 16px 0; }
 
     /* ── PROGRESS ── */
     .progress-wrap { margin-bottom: 32px; }
@@ -79,6 +68,14 @@
       color: var(--mid-green); line-height: 1.6;
     }
     .multi-notice strong { color: var(--gold); }
+    .link-clear { background: none; border: none; padding: 0; margin-left: 4px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--forest); text-decoration: underline; cursor: pointer; }
+
+    /* Quick-add roster — Step 2, offers one-tap re-add for remembered children */
+    .quick-add-roster { margin-bottom: 16px; }
+    .quick-add-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--mid-green); margin-bottom: 8px; }
+    .quick-add-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .quick-add-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(212,168,67,0.08); border: 1px dashed rgba(212,168,67,0.4); border-radius: 20px; padding: 8px 14px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--forest); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+    .quick-add-chip:hover { background: rgba(212,168,67,0.16); border-color: var(--gold); }
 
     /* ── FORM FIELDS ── */
     .form-section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
@@ -127,13 +124,13 @@
       flex: 1; padding: 12px 8px; border-radius: 3px; cursor: pointer;
       border: 1px solid rgba(138,175,159,0.18);
       background: transparent; color: var(--sage);
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px;
       text-transform: uppercase; letter-spacing: 1px;
       transition: all 0.15s; text-align: center; line-height: 1.3;
     }
     .clinic-btn:active { background: rgba(212,168,67,0.1); }
     .clinic-btn.selected { background: rgba(212,168,67,0.12); border-color: var(--gold); color: var(--cream); }
-    .clinic-btn-age { display: block; font-size: 9px; color: var(--sage); font-weight: 500; letter-spacing: 1px; margin-top: 2px; }
+    .clinic-btn-age { display: block; font-size: 10.5px; color: var(--sage); font-weight: 500; letter-spacing: 1px; margin-top: 2px; }
     .clinic-btn.selected .clinic-btn-age { color: var(--sage); }
 
     /* Child name/age fields inside card */
@@ -226,16 +223,18 @@
 
     /* Checkboxes */
     .check-row { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 4px 0; }
-    .custom-check { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; border: 2px solid rgba(138,175,159,0.35); appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; position: relative; transition: border-color 0.2s, background 0.2s; }
+    .custom-check { width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0; border: 2px solid rgba(61,107,90,0.45); appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; position: relative; transition: border-color 0.2s, background 0.2s; }
+    .waiver-block .custom-check { border-color: rgba(245,240,232,0.45); }
     .custom-check:checked { background: var(--gold); border-color: var(--gold); }
     .custom-check:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); color: var(--black); font-size: 13px; font-weight: 700; line-height: 1; }
-    .check-label { font-family: 'Inter', sans-serif; font-size: 14px; color: var(--sage); line-height: 1.5; padding-top: 2px; }
+    .check-label { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--forest); line-height: 1.5; padding-top: 2px; }
+    .waiver-block .check-label { color: var(--gold); }
 
     /* ── PAYMENT METHOD SELECTOR ── */
     .pay-method-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
     .pay-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .pay-option { display: flex; align-items: center; gap: 14px; background: var(--forest); border: 1px solid rgba(138,175,159,0.14); border-radius: 4px; padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
-    .pay-option.selected { border-color: var(--gold); background: rgba(212,168,67,0.06); }
+    .pay-option.selected { border-color: var(--gold); background: linear-gradient(rgba(212,168,67,0.14), rgba(212,168,67,0.14)), var(--forest); }
     .pay-option input[type="radio"] { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
     .pay-option-text { flex: 1; }
     .pay-option-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--cream); letter-spacing: 0.5px; }
@@ -269,7 +268,7 @@
     .secure-note svg { width: 14px; height: 14px; stroke: var(--mid-green); fill: none; stroke-width: 2; flex-shrink: 0; }
 
     /* ── BUTTONS ── */
-    .step-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .step-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; margin-bottom: 40px; }
     .btn-next { width: 100%; background: var(--gold); color: var(--black); border: none; border-radius: 3px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 2px; text-transform: uppercase; padding: 17px 24px; cursor: pointer; transition: background 0.2s; }
     .btn-next:active:not(:disabled) { background: var(--soft-gold); }
     .btn-next:disabled { opacity: 0.32; cursor: not-allowed; }
@@ -297,44 +296,184 @@
     .success-contact a { color: var(--gold); text-decoration: none; }
 
     /* ── FOOTER ── */
-    .site-footer { background: var(--black); padding: 20px; text-align: center; }
-    .footer-text { font-family: 'Inter', sans-serif; font-size: 12px; color: rgba(138,175,159,0.5); line-height: 1.7; }
-    .footer-text a { color: var(--gold); text-decoration: none; }
+    .site-footer { background: var(--black); border-top: 1px solid rgba(138,175,159,0.15); padding: 40px 20px 20px; width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); }
+    .footer-top { display: flex; flex-direction: column; gap: 32px; padding-bottom: 28px; border-bottom: 1px solid rgba(138,175,159,0.15); margin-bottom: 20px; }
+    .footer-brand-word { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 1.5px; color: var(--cream); text-transform: uppercase; }
+    .footer-brand-sub { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 3px; color: var(--sage); text-transform: uppercase; margin-top: 2px; margin-bottom: 14px; }
+    .footer-tagline { font-family: 'Caveat', cursive; font-weight: 600; font-size: 18px; color: var(--soft-gold); max-width: 260px; line-height: 1.4; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 32px; }
+    .footer-links-col { min-width: 140px; }
+    .footer-links-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .footer-links-col ul { list-style: none; }
+    .footer-links-col ul li + li { margin-top: 9px; }
+    .footer-links-col a, .footer-links-col button, .footer-contact-item a { display: inline-block; font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--sage); text-decoration: none; transition: color 0.2s; background: none; border: none; cursor: pointer; padding: 0; margin: 0; text-align: left; }
+    .footer-links-col a:hover, .footer-links-col button:hover, .footer-contact-item a:hover { color: var(--cream); }
+    .footer-contact-item { font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--sage); margin-bottom: 9px; }
+    .footer-bottom { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .footer-copy { font-family: 'Inter', sans-serif; font-size: 11.5px; color: rgba(138,175,159,0.5); }
+
+    /* ── OTHER EVENTS ── */
+    .section-heading-wrap { padding: 44px 20px 6px; }
+    .section-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 32px; text-transform: uppercase; color: var(--forest); line-height: 1; }
+    .section-heading .gold { color: var(--gold); }
+    .section-sub { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--mid-green); margin-top: 6px; line-height: 1.5; }
+    .events-grid { display: grid; grid-template-columns: 1fr; gap: 14px; padding: 16px 0 4px; text-align: left; }
+    .event-card { background: var(--forest); border-radius: 5px; border-left: 3px solid var(--gold); padding: 18px; }
+    .event-tag { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 3px 8px; border-radius: 2px; margin-bottom: 10px; }
+    .event-tag.past { background: rgba(138,175,159,0.25); color: var(--cream); }
+    .event-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; color: var(--cream); margin-bottom: 6px; line-height: 1.05; }
+    .event-desc { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--sage); line-height: 1.6; margin-bottom: 10px; }
+    .event-meta-row { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--cream); line-height: 1.9; }
+    .event-meta-row span { color: var(--gold); margin-right: 6px; }
+    .past-events-note { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--mid-green); font-style: italic; padding: 4px 20px 8px; }
+
+    /* ── LANDING HERO — full-width "poster" pattern, left-aligned (matches programs.html) ── */
+    /* Persistent header — stays visible across the welcome page AND the booking steps, matches the hero's forest-green treatment */
+    .site-header { background: var(--forest); padding: 20px 20px; display: flex; align-items: center; justify-content: flex-start; }
+    .header-brand { display: flex; align-items: center; gap: 14px; background: none; border: none; padding: 0; margin: 0; cursor: pointer; text-align: left; }
+    .header-logo { height: 52px; width: 52px; object-fit: contain; flex-shrink: 0; }
+    .header-word { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 1px; text-transform: uppercase; color: var(--cream); line-height: 1.1; }
+    .header-sub { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-top: 2px; }
+
+    .land-hero { padding: 20px 20px 40px; background: var(--forest); }
+    .land-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); }
+    .land-headline { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: clamp(56px, 14vw, 132px); line-height: 0.84; text-transform: uppercase; color: var(--cream); letter-spacing: -2px; max-width: 900px; }
+    .land-headline .gold { color: var(--gold); }
+    .land-intro { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--sage); line-height: 1.7; max-width: 520px; margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(138,175,159,0.2); }
+
+    /* Trust facts row — one line, dot-separated (the hero's credibility markers) */
+    .land-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 24px; }
+    .land-fact { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--cream); font-weight: 500; white-space: nowrap; }
+    .land-fact-sep { color: var(--gold); font-size: 13px; }
+
+    /* Scroll cue — "hook for the scroll" pointing down to the clinic cards */
+    .land-scroll-cue { display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; padding: 0; margin: -14px auto 120px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid-green); }
+    .land-scroll-cue svg { width: 15px; height: 15px; stroke: var(--gold); animation: landArrowBounce 1.8s ease-in-out infinite; }
+    @keyframes landArrowBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+    /* Cream "rhythm change" band that holds the clinic cards — breaks out of the centered .main column to full width */
+    .clinic-section { background: var(--cream); width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); padding: 4px 16px 32px; }
+    .clinic-cards { display: flex; flex-direction: column; gap: 20px; max-width: 1040px; margin: 0 auto; }
+    .clinic-card { background: var(--cream); border-radius: 6px; overflow: hidden; border: 1px solid rgba(27,58,47,0.14); box-shadow: 0 4px 20px rgba(27,58,47,0.07); transition: transform 0.2s; }
+    .clinic-card:hover { transform: translateY(-2px); }
+
+    /* Card-top: Mini = gold treatment, Youth = forest treatment (matches the printed flyer) */
+    .clinic-card-top { padding: 30px 26px 22px; }
+    .clinic-card-top.mini { background: var(--gold); }
+    .clinic-card-top.youth { background: var(--forest); }
+
+    .clinic-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 14px; }
+    .clinic-card-top.mini .clinic-badge { background: var(--forest); color: var(--cream); }
+    .clinic-card-top.youth .clinic-badge { background: var(--gold); color: var(--black); }
+
+    .clinic-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase; line-height: 1; margin-bottom: 10px; letter-spacing: 0.3px; }
+    .clinic-card-top.mini .clinic-name { color: var(--black); }
+    .clinic-card-top.youth .clinic-name { color: var(--cream); }
+
+    .clinic-hook { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; margin-bottom: 10px; font-weight: 500; }
+    .clinic-card-top.mini .clinic-hook { color: var(--forest); }
+    .clinic-card-top.youth .clinic-hook { color: var(--sage); }
+
+    .clinic-explainer { font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.6; }
+    .clinic-card-top.mini .clinic-explainer { color: var(--forest); opacity: 0.8; }
+    .clinic-card-top.youth .clinic-explainer { color: var(--sage); opacity: 0.85; }
+
+    /* Stats + description: cream panel under the colored header, like the flyer's column layout */
+    .clinic-stats { display: grid; grid-template-columns: 1fr 1fr; background: var(--cream); }
+    .clinic-stat { padding: 20px 20px; border-left: 1px solid rgba(61,107,90,0.18); border-top: 1px solid rgba(61,107,90,0.18); }
+    .clinic-stat:nth-child(odd) { border-left: none; }
+    .clinic-stat:nth-child(-n+2) { border-top: none; }
+    .clinic-stat-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--mid-green); margin-bottom: 7px; }
+    .clinic-stat-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 19px; text-transform: uppercase; color: var(--forest); line-height: 1.15; }
+    .clinic-stat-sub { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--mid-green); margin-top: 4px; line-height: 1.35; }
+
+    .clinic-detail { background: var(--cream); padding: 4px 26px 20px; border-top: 1px solid rgba(61,107,90,0.18); }
+    .clinic-detail p { font-family: 'Inter', sans-serif; font-size: 13.5px; color: var(--mid-green); line-height: 1.65; padding-top: 16px; }
+    .clinic-detail strong { color: var(--forest); font-weight: 600; }
+
+    .clinic-cta-wrap { background: var(--cream); padding: 4px 26px 26px; }
+    .clinic-cta { display: block; text-align: center; background: var(--gold); color: var(--black); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; padding: 17px; border: none; border-radius: 3px; width: 100%; cursor: pointer; transition: background 0.2s; }
+    .clinic-cta:hover, .clinic-cta:active { background: var(--soft-gold); }
+    .clinic-cta-note { font-family: 'Inter', sans-serif; font-size: 11.5px; color: var(--mid-green); text-align: center; margin-top: 10px; }
+
+    .land-note { font-family: 'Caveat', cursive; font-weight: 600; font-size: 22px; color: var(--soft-gold); line-height: 1.4; text-align: left; max-width: 520px; margin-top: 18px; }
+
+    /* FAQ accordion — finishes the page on deep forest green, full-bleed like the hero/cards */
+    .land-faq { background: var(--deep-forest); width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); margin-top: 8px; padding: 24px 20px 8px; }
+    .land-faq-inner { width: 100%; }
+    .land-faq-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; }
+    .land-faq-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; line-height: 0.95; text-transform: uppercase; color: var(--cream); margin-bottom: 6px; }
+    .faq-list { list-style: none; }
+    .faq-item { border-top: 1px solid rgba(138,175,159,0.18); }
+    .faq-item:last-child { border-bottom: 1px solid rgba(138,175,159,0.18); }
+    .faq-q { width: 100%; background: none; border: none; cursor: pointer; padding: 16px 2px; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; }
+    .faq-q-text { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; color: var(--cream); line-height: 1.3; }
+    .faq-q-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgba(138,175,159,0.35); display: flex; align-items: center; justify-content: center; color: var(--sage); font-size: 15px; font-weight: 300; transition: all 0.2s; line-height: 1; }
+    .faq-item.open .faq-q-icon { border-color: var(--gold); color: var(--cream); transform: rotate(45deg); }
+    .faq-a { display: none; padding: 0 2px 18px; }
+    .faq-a p { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--sage); line-height: 1.65; }
+    .faq-item.open .faq-a { display: block; }
 
     /* ── DESKTOP ── */
     @media (min-width: 560px) {
-      .hero { padding: 40px 32px 44px; }
-      .hero-headline { font-size: 64px; }
-      .hero-facts { flex-direction: row; flex-wrap: wrap; gap: 10px 20px; }
-      .main { padding: 36px 24px 80px; }
+      .site-header { padding: 24px 40px; }
+      .header-logo { height: 64px; width: 64px; }
+      .header-word { font-size: 20px; }
+      .header-sub { font-size: 10.5px; }
+      .land-hero { padding: 24px 40px 56px; }
+      .main { padding: 36px 24px 0; }
       .step-heading { font-size: 44px; }
       .step-nav { flex-direction: row; }
       .btn-back { width: auto; flex-shrink: 0; }
       .btn-next { flex: 1; }
       .clinic-toggle { gap: 12px; }
+      .events-grid { grid-template-columns: 1fr 1fr; }
+      .site-footer { padding: 56px 40px 24px; }
+      .footer-top { flex-direction: row; gap: 64px; }
+      .footer-links { flex: 1; gap: 48px; }
+      .footer-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
+      .land-faq { padding: 40px 40px 8px; }
+      .clinic-section { padding: 8px 40px 48px; }
+      .clinic-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      .clinic-card-top { padding: 30px 26px 20px; }
+      .clinic-name { font-size: 34px; }
+      .clinic-hook { font-size: 15px; }
+      .clinic-detail { padding: 4px 34px 24px; }
+      .clinic-cta-wrap { padding: 4px 34px 30px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ══════════════════════════════════════
+     PERSISTENT HEADER — visible on the welcome page AND every booking step
+══════════════════════════════════════ -->
 <header class="site-header">
-  <div class="logo-mark">
-    <span class="logo-name">Soccer Clinics</span>
-    <span class="logo-sub">Oklahoma City</span>
-  </div>
-  <span class="header-badge">OKC</span>
+  <button type="button" class="header-brand" onclick="backToLanding()" aria-label="Back to clinic info">
+    <img src="P90_badge_white.png" alt="P90 Logo" class="header-logo" />
+    <div>
+      <div class="header-word">Soccer Clinics OKC</div>
+      <div class="header-sub">A Path to 90 Community Event</div>
+    </div>
+  </button>
 </header>
 
-<section class="hero">
-  <p class="hero-eyebrow">Grand Mosque Field · OKC</p>
-  <h1 class="hero-headline">Soccer<br><span class="gold">Clinics OKC</span></h1>
-  <p class="hero-sub">Pick your sessions, pay once, and you're in. Takes under 2 minutes.</p>
-  <div class="hero-facts">
-    <span class="hero-fact"><span class="dot">⚽</span>Ages 4–12</span>
-    <span class="hero-fact"><span class="dot">📍</span>3201 NW 48th St, OKC</span>
-    <span class="hero-fact"><span class="dot">👨‍👩‍👧‍👦</span>Register multiple kids at once</span>
-    <span class="hero-fact"><span class="dot">✅</span>Instant confirmation</span>
+<!-- ══════════════════════════════════════
+     LANDING HERO — full-width "poster" pattern, left-aligned (matches programs.html)
+══════════════════════════════════════ -->
+<section id="landHeroSection" class="land-hero">
+  <h2 class="land-headline">Finding the right<br><span class="gold">soccer clinic.</span></h2>
+  <p class="land-intro">Welcome! Path to 90 runs two weekly soccer clinics for kids this summer. Take a look below, pick the one that fits your player, and you'll be registered in under 2 minutes.</p>
+
+  <div class="land-facts">
+    <span class="land-fact">⚽ Ages 5–12</span>
+    <span class="land-fact-sep">·</span>
+    <span class="land-fact">📍 3201 NW 48th St, OKC</span>
+    <span class="land-fact-sep">·</span>
+    <span class="land-fact">👨‍👩‍👧‍👦 Register multiple kids at once</span>
   </div>
+
+  <p class="land-note">All skill levels welcome. Come play, make new friends, and be part of something good this summer.</p>
 </section>
 
 <!-- Hidden form — Netlify reads this at deploy time to know what fields to capture -->
@@ -352,8 +491,149 @@
 
 <main class="main">
 
+  <!-- ══════════════════════════════════════
+       LANDING — CLINIC INFO (shown first, before any step)
+  ══════════════════════════════════════ -->
+  <section id="landingSection">
+    <div class="clinic-section">
+    <button class="land-scroll-cue" onclick="document.querySelector('.clinic-cards').scrollIntoView({behavior:'smooth', block:'center'})">
+      See the clinics
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="clinic-cards">
+      <div class="clinic-card">
+        <div class="clinic-card-top mini">
+          <span class="clinic-badge">Ages 5–6</span>
+          <h3 class="clinic-name">Mini Clinic</h3>
+          <p class="clinic-hook">Ball skills, small-sided games, and a whole lot of fun.</p>
+          <p class="clinic-explainer">Every Wednesday, all summer at Grand Mosque Field — 45 minutes built just for the youngest players, ages 5 and 6.</p>
+        </div>
+        <div class="clinic-stats">
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Day</div>
+            <div class="clinic-stat-value">Wednesdays</div>
+            <div class="clinic-stat-sub">Weekly, all summer</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Time</div>
+            <div class="clinic-stat-value">6:00–6:45 PM</div>
+            <div class="clinic-stat-sub">45-minute session</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Group Size</div>
+            <div class="clinic-stat-value">Max 15</div>
+            <div class="clinic-stat-sub">Min 5 players to run</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Pricing</div>
+            <div class="clinic-stat-value">$20/session</div>
+            <div class="clinic-stat-sub">$35 for 2 (save $5)</div>
+          </div>
+        </div>
+        <div class="clinic-detail">
+          <p>Led by Coach Abou, every session blends simple ball work with easy, low-pressure games — a first real introduction to soccer for players ages 5 and 6. <strong>No experience needed.</strong></p>
+        </div>
+        <div class="clinic-cta-wrap">
+          <button class="clinic-cta" onclick="startRegistration('mini')">Register — Mini Clinic →</button>
+          <p class="clinic-cta-note">Takes under 2 minutes · pick sessions on the next screen</p>
+        </div>
+      </div>
+
+      <div class="clinic-card">
+        <div class="clinic-card-top youth">
+          <span class="clinic-badge">Ages 7–12</span>
+          <h3 class="clinic-name">Youth Clinic</h3>
+          <p class="clinic-hook">Skills, competition, and fun — every single week.</p>
+          <p class="clinic-explainer">Every Monday &amp; Wednesday at Grand Mosque Field — a full hour of coached training for players ages 7 to 12.</p>
+        </div>
+        <div class="clinic-stats">
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Days</div>
+            <div class="clinic-stat-value">Monday &amp; Wednesday</div>
+            <div class="clinic-stat-sub">Weekly, all summer</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Time</div>
+            <div class="clinic-stat-value">7:00–8:00 PM</div>
+            <div class="clinic-stat-sub">60-minute session</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Group Size</div>
+            <div class="clinic-stat-value">Max 15</div>
+            <div class="clinic-stat-sub">Min 5 players to run</div>
+          </div>
+          <div class="clinic-stat">
+            <div class="clinic-stat-label">Pricing</div>
+            <div class="clinic-stat-value">$25/session</div>
+            <div class="clinic-stat-sub">$40 for 2 (save $10)</div>
+          </div>
+        </div>
+        <div class="clinic-detail">
+          <p>Led by Coach Abou, every session blends technical work with real, competitive small-sided play — organized into two age groups (U7–U9 and U10–U12) so the work fits where each player is right now. <strong>All levels welcome.</strong></p>
+        </div>
+        <div class="clinic-cta-wrap">
+          <button class="clinic-cta" onclick="startRegistration('youth')">Register — Youth Clinic →</button>
+          <p class="clinic-cta-note">Takes under 2 minutes · pick sessions on the next screen</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- FAQ — more depth than the printed flyer has room for -->
+    <div class="land-faq">
+     <div class="land-faq-inner">
+      <p class="land-faq-label">Good to know</p>
+      <h3 class="land-faq-heading">Questions,<br>answered.</h3>
+      <ul class="faq-list" id="landingFaqList">
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">What if we can only make some weeks?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>Totally fine — pick single sessions as you go, or grab the 2-session bundle to save. There's no season-long commitment either way.</p></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">What if a session gets canceled?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>Sessions need at least 5 players to run. If we don't hit that, you'll get a full refund or a transfer to the next session — your choice. You're always confirmed by 12 PM the day of.</p></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">What's the cancellation policy if I need to drop out?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>Cancel 24+ hours ahead and it's a full refund. Inside 24 hours it's non-refundable — spots are limited and held for your player.</p></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">Can I register more than one child?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>Yes — enter your info once, then add each child individually. Every kid can pick a different clinic and different sessions if needed.</p></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">How does payment work?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>Venmo, CashApp, Apple Pay, or Cash by direct request. Payment details are sent by email right after you register — nothing to enter here on the site.</p></div>
+        </li>
+        <li class="faq-item">
+          <button class="faq-q" onclick="toggleLandingFaq(this)">
+            <span class="faq-q-text">Where exactly is Grand Mosque Field?</span>
+            <span class="faq-q-icon">+</span>
+          </button>
+          <div class="faq-a"><p>3201 NW 48th St, Oklahoma City. Bring water and wear cleats or turf shoes — any last-minute updates go out by text.</p></div>
+        </li>
+      </ul>
+     </div>
+    </div>
+  </section>
+
   <!-- PROGRESS -->
-  <div class="progress-wrap" id="progressWrap">
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
     <div class="progress-steps">
       <div class="progress-step"><div class="progress-dot active" id="dot1" onclick="navTo(1)">1</div><div class="progress-line" id="line1"></div></div>
       <div class="progress-step"><div class="progress-dot" id="dot2" onclick="navTo(2)">2</div><div class="progress-line" id="line2"></div></div>
@@ -371,9 +651,16 @@
   <!-- ══════════════════════════════════════
        STEP 1 — PARENT INFO
   ══════════════════════════════════════ -->
-  <div class="step-panel active" id="step1">
+  <div class="step-panel" id="step1">
+    <button style="background:none;border:none;font-family:'Inter',sans-serif;font-size:12px;color:var(--mid-green);text-decoration:underline;cursor:pointer;padding:0;margin-bottom:14px;" onclick="backToLanding()">← Back to clinic info</button>
     <h2 class="step-heading">Your <span class="gold">info.</span></h2>
     <p class="step-sub">Entered once — covers all children you register today.</p>
+
+    <div class="multi-notice" id="clinicPreselectNotice" style="display:none;"></div>
+
+    <div class="multi-notice" id="welcomeBackNotice" style="display:none;">
+      <strong>Welcome back!</strong> We've filled in your info from last time. <button type="button" class="link-clear" onclick="clearSavedProfile()">Not you? Clear this</button>
+    </div>
 
     <div class="multi-notice">
       <strong>Registering more than one child?</strong> No problem — you'll add each child on the next screen. One checkout covers everyone.
@@ -403,10 +690,17 @@
       </div>
     </div>
 
-    <div style="margin-bottom:24px;">
+    <div style="margin-bottom:14px;">
       <label class="check-row">
         <input type="checkbox" class="custom-check" id="whatsappCheck" />
         <span class="check-label">Send me session updates via WhatsApp. <span style="color:var(--mid-green);font-size:12px;">(Save +1 551 221 4840 in your contacts first.)</span></span>
+      </label>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <label class="check-row">
+        <input type="checkbox" class="custom-check" id="rememberMeCheck" />
+        <span class="check-label">Remember me on this device. <span style="color:var(--mid-green);font-size:12px;">(Saves your info and kids' names/ages here so next time is faster — nothing is stored anywhere but this device.)</span></span>
       </label>
     </div>
 
@@ -421,6 +715,11 @@
   <div class="step-panel" id="step2">
     <h2 class="step-heading">Add your <span class="gold">children.</span></h2>
     <p class="step-sub">Each child picks their own clinic and sessions. Discounts apply per child.</p>
+
+    <div class="quick-add-roster" id="quickAddRoster" style="display:none;">
+      <p class="quick-add-label">Quick add — from last time</p>
+      <div class="quick-add-chips" id="quickAddChips"></div>
+    </div>
 
     <div class="child-cards" id="childCards"></div>
 
@@ -582,18 +881,85 @@
       Questions? Text Coach Abou at <a href="tel:+15512214840">+1 551 221 4840</a><br>
       or email <a href="mailto:p90training@gmail.com">p90training@gmail.com</a>
     </p>
+
+    <!-- Shown only after registration is complete — not on the main page -->
+    <div class="section-heading-wrap" style="padding-left:0;padding-right:0;text-align:left;">
+      <h2 class="section-heading" style="font-size:26px;">Other <span class="gold">Events</span></h2>
+    </div>
+    <div class="events-grid">
+      <div class="event-card">
+        <span class="event-tag">Upcoming</span>
+        <h3 class="event-title">P90 Kids 4v4 Tournament</h3>
+        <p class="event-desc">Youth (U8–U11) &amp; Junior (U12–U14) brackets · 4v4, no goalkeeper · group stage + knockout</p>
+        <div class="event-meta-row"><span>📅</span>Saturday, July 12, 2026 · 8:00 AM – 12:00 PM</div>
+        <div class="event-meta-row"><span>📍</span>Grand Mosque Field, OKC</div>
+        <div class="event-meta-row"><span>💰</span>$40/team · $12/player individual</div>
+      </div>
+
+      <div class="event-card">
+        <span class="event-tag">Upcoming</span>
+        <h3 class="event-title">P90 Adult 4v4 Tournament</h3>
+        <p class="event-desc">18+ Open, all levels welcome · 4v4, no goalkeeper · group stage + knockout</p>
+        <div class="event-meta-row"><span>📅</span>Saturday, July 25, 2026 · 1:00 PM – 4:00 PM</div>
+        <div class="event-meta-row"><span>📍</span>Grand Mosque Field, OKC</div>
+        <div class="event-meta-row"><span>💰</span>$50/team · $15/player individual</div>
+      </div>
+    </div>
   </div>
 
 </main>
 
 <footer class="site-footer">
-  <p class="footer-text">
-    Soccer Clinics OKC · Grand Mosque Field · 3201 NW 48th St, OKC<br>
-    <a href="mailto:p90training@gmail.com">p90training@gmail.com</a> · +1 551 221 4840
-  </p>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand-word">Soccer Clinics OKC</span>
+      <span class="footer-brand-sub">A Path to 90 Community Event</span>
+      <p class="footer-tagline">Two clinics. All summer. Every player welcome.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-links-col">
+        <p class="footer-links-label">This summer</p>
+        <ul>
+          <li><button onclick="backToLanding(); document.querySelector('.clinic-cards').scrollIntoView({behavior:'smooth', block:'center'})">Mini Clinic</button></li>
+          <li><button onclick="backToLanding(); document.querySelector('.clinic-cards').scrollIntoView({behavior:'smooth', block:'center'})">Youth Clinic</button></li>
+          <li><button onclick="backToLanding(); document.querySelector('.land-faq').scrollIntoView({behavior:'smooth', block:'center'})">Good to know / FAQ</button></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <p class="footer-links-label">Contact</p>
+        <p class="footer-contact-item"><a href="tel:+15512214840">+1 551 221 4840</a></p>
+        <p class="footer-contact-item"><a href="mailto:p90training@gmail.com">p90training@gmail.com</a></p>
+        <p class="footer-contact-item"><a href="https://instagram.com/path.to.90" target="_blank" rel="noopener">Instagram · @path.to.90</a></p>
+      </div>
+      <div class="footer-links-col">
+        <p class="footer-links-label">Location</p>
+        <p class="footer-contact-item">Grand Mosque Field</p>
+        <p class="footer-contact-item">3201 NW 48th St, OKC</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; 2026 Path to 90 &middot; Aboubakr Diallo &middot; Oklahoma City, OK</p>
+  </div>
 </footer>
 
 <script>
+// ─────────────────────────────────────────────
+//  OTHER EVENTS — nav dropdown
+// ─────────────────────────────────────────────
+function toggleEventsMenu() {
+  document.getElementById('eventsMenu').classList.toggle('open');
+  document.getElementById('eventsMenuBtn').classList.toggle('open');
+}
+function closeEventsMenu() {
+  document.getElementById('eventsMenu').classList.remove('open');
+  document.getElementById('eventsMenuBtn').classList.remove('open');
+}
+document.addEventListener('click', function (e) {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (dropdown && !dropdown.contains(e.target)) closeEventsMenu();
+});
+
 // ─────────────────────────────────────────────
 //  CONFIG — payment handles sent via Zapier email, not shown on page
 // ─────────────────────────────────────────────
@@ -607,8 +973,8 @@
 const SESSIONS = {
   mini: {
     name: 'Mini Clinic',
-    label: 'Mini · Ages 4–6',
-    ages: [4, 5, 6],
+    label: 'Mini · Ages 5–6',
+    ages: [5, 6],
     time: '6:00 – 6:45 PM',
     days: 'Wednesdays',
     singlePrice: 20,
@@ -652,6 +1018,142 @@ const SESSIONS = {
 let children = [];
 let childCounter = 0;
 let totalDollars = 0;
+let pendingClinic = null; // set when a clinic is chosen from the landing page — pre-fills the first child in Step 2
+let savedProfile = null; // loaded from this browser's localStorage, if the parent opted into "Remember me" previously
+
+// ─────────────────────────────────────────────
+//  REMEMBER ME — local-device only, opt-in.
+//  Nothing here is transmitted anywhere; it only pre-fills fields on this
+//  same browser so a returning parent doesn't have to retype everything.
+// ─────────────────────────────────────────────
+const SAVED_PROFILE_KEY = 'p90SavedProfile';
+
+function loadSavedProfile() {
+  let raw;
+  try { raw = localStorage.getItem(SAVED_PROFILE_KEY); } catch (e) { return; }
+  if (!raw) return;
+  try { savedProfile = JSON.parse(raw); } catch (e) { savedProfile = null; return; }
+  if (!savedProfile) return;
+
+  document.getElementById('parentName').value  = savedProfile.parentName  || '';
+  document.getElementById('parentPhone').value = savedProfile.parentPhone || '';
+  document.getElementById('parentEmail').value = savedProfile.parentEmail || '';
+  document.getElementById('whatsappCheck').checked   = !!savedProfile.whatsapp;
+  document.getElementById('rememberMeCheck').checked = true;
+  document.getElementById('welcomeBackNotice').style.display = 'block';
+
+  renderQuickAddRoster();
+}
+
+function clearSavedProfile() {
+  try { localStorage.removeItem(SAVED_PROFILE_KEY); } catch (e) {}
+  savedProfile = null;
+  document.getElementById('parentName').value  = '';
+  document.getElementById('parentPhone').value = '';
+  document.getElementById('parentEmail').value = '';
+  document.getElementById('whatsappCheck').checked   = false;
+  document.getElementById('rememberMeCheck').checked = false;
+  document.getElementById('welcomeBackNotice').style.display = 'none';
+  renderQuickAddRoster();
+}
+
+function saveProfileIfOptedIn(parentName, parentPhone, parentEmail, whatsappYes) {
+  const remember = document.getElementById('rememberMeCheck')?.checked;
+  if (!remember) return;
+  const profile = {
+    parentName, parentPhone, parentEmail,
+    whatsapp: !!whatsappYes,
+    children: children
+      .filter(c => c.name && c.name.trim().length > 1)
+      .map(c => ({ name: c.name, age: c.age, clinic: c.clinic })),
+  };
+  try { localStorage.setItem(SAVED_PROFILE_KEY, JSON.stringify(profile)); } catch (e) {}
+}
+
+function renderQuickAddRoster() {
+  const wrap = document.getElementById('quickAddRoster');
+  const chipsEl = document.getElementById('quickAddChips');
+  if (!wrap || !chipsEl) return;
+
+  if (!savedProfile || !savedProfile.children || savedProfile.children.length === 0) {
+    wrap.style.display = 'none';
+    return;
+  }
+
+  // Don't suggest a saved child that's already been added this session
+  const alreadyAdded = new Set(children.map(c => (c.name || '').trim().toLowerCase()));
+  const remaining = savedProfile.children
+    .map((c, i) => ({ ...c, savedIdx: i }))
+    .filter(c => !alreadyAdded.has((c.name || '').trim().toLowerCase()));
+
+  if (remaining.length === 0) {
+    wrap.style.display = 'none';
+    return;
+  }
+
+  wrap.style.display = 'block';
+  chipsEl.innerHTML = remaining.map(c =>
+    `<button type="button" class="quick-add-chip" onclick="quickAddSavedChild(${c.savedIdx})">+ ${c.name}${c.age ? ' (' + c.age + ')' : ''}</button>`
+  ).join('');
+}
+
+function quickAddSavedChild(savedIdx) {
+  if (!savedProfile || !savedProfile.children || !savedProfile.children[savedIdx]) return;
+  const saved = savedProfile.children[savedIdx];
+  childCounter++;
+  const id = 'child-' + childCounter;
+  children.push({ id, name: saved.name || '', age: saved.age || '', clinic: saved.clinic || null, slots: [] });
+  renderChildCards();
+  renderQuickAddRoster();
+  checkStep2();
+  setTimeout(() => {
+    const el = document.getElementById('card-' + id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// ─────────────────────────────────────────────
+//  LANDING — hand off into the booking flow
+//  Always lands on Step 1 (Your Info) first — the clinic choice is only
+//  carried forward as a pre-fill for the first child in Step 2, nothing
+//  about Step 1 itself is skipped or pre-filled.
+// ─────────────────────────────────────────────
+function startRegistration(clinicType) {
+  pendingClinic = clinicType || null; // 'mini', 'youth', or null if unsure
+
+  const notice = document.getElementById('clinicPreselectNotice');
+  if (pendingClinic && SESSIONS[pendingClinic]) {
+    notice.style.display = 'block';
+    notice.innerHTML = `<strong>${SESSIONS[pendingClinic].name}</strong> selected — we'll carry that into your first child's registration below. You can change it there if needed.`;
+  } else {
+    notice.style.display = 'none';
+  }
+
+  document.getElementById('landHeroSection').style.display = 'none';
+  document.getElementById('landingSection').style.display = 'none';
+  document.getElementById('progressWrap').style.display = '';
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToLanding() {
+  pendingClinic = null;
+  document.getElementById('progressWrap').style.display = 'none';
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('successScreen').classList.remove('visible');
+  document.getElementById('landHeroSection').style.display = '';
+  document.getElementById('landingSection').style.display = '';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Landing page FAQ accordion (single-open, same pattern as the main P90 site)
+function toggleLandingFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('#landingFaqList .faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 
 // ─────────────────────────────────────────────
 //  STEP 1 — PARENT VALIDATION
@@ -678,8 +1180,12 @@ function validateStep1() {
 function addChild() {
   childCounter++;
   const id = 'child-' + childCounter;
-  children.push({ id, name: '', age: '', clinic: null, slots: [] });
+  const isFirstChild = children.length === 0;
+  const clinic = (isFirstChild && pendingClinic) ? pendingClinic : null;
+  children.push({ id, name: '', age: '', clinic, slots: [] });
+  if (isFirstChild) pendingClinic = null; // only auto-apply to the first child; siblings choose fresh
   renderChildCards();
+  renderQuickAddRoster();
   // scroll to the new card
   setTimeout(() => {
     const el = document.getElementById('card-' + id);
@@ -690,6 +1196,7 @@ function addChild() {
 function removeChild(id) {
   children = children.filter(c => c.id !== id);
   renderChildCards();
+  renderQuickAddRoster();
   checkStep2();
 }
 
@@ -724,6 +1231,7 @@ function updateChildField(childId, field, value) {
   checkStep2();
   // update card status label
   updateCardStatus(childId);
+  if (field === 'name') renderQuickAddRoster();
 }
 
 function isChildComplete(child) {
@@ -780,15 +1288,15 @@ function renderChildCards() {
 
         <!-- Clinic toggle -->
         <div style="margin-bottom:12px;">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Which clinic?</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Which clinic?</div>
           <div class="clinic-toggle">
             <button class="clinic-btn ${child.clinic === 'mini' ? 'selected' : ''}"
               onclick="setClinic('${child.id}', 'mini')">
-              Mini Clinic<span class="clinic-btn-age">Ages 4–6 · Wed</span>
+              Mini Clinic<span class="clinic-btn-age">Ages 5–6 · Wednesdays</span>
             </button>
             <button class="clinic-btn ${child.clinic === 'youth' ? 'selected' : ''}"
               onclick="setClinic('${child.id}', 'youth')">
-              Youth Clinic<span class="clinic-btn-age">Ages 7–12 · Mon &amp; Wed</span>
+              Youth Clinic<span class="clinic-btn-age">Ages 7–12 · Monday &amp; Wednesday</span>
             </button>
           </div>
         </div>
@@ -1085,6 +1593,8 @@ async function handlePayment() {
     submittedAt: new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }),
   };
 
+  saveProfileIfOptedIn(parentName, parentPhone, parentEmail, whatsapp === 'Yes');
+
   try {
     // Submit to Netlify Forms
     const formData = new FormData();
@@ -1164,9 +1674,15 @@ function goTo(step) {
   if (step === 2 && !validateStep1()) return;
 
   if (step === 2) {
-    // initialize with one child card if empty
-    if (children.length === 0) addChild();
-    else renderChildCards();
+    const hasSavedChildren = savedProfile && savedProfile.children && savedProfile.children.length > 0;
+    // initialize with one blank child card if empty — unless we have saved children to suggest instead,
+    // in which case let the quick-add chips be the first thing the parent sees
+    if (children.length === 0 && !hasSavedChildren) {
+      addChild();
+    } else {
+      renderChildCards();
+      renderQuickAddRoster();
+    }
   }
 
   if (step === 3) {
@@ -1201,6 +1717,9 @@ function goTo(step) {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// Load any saved "Remember me" profile from this browser, if the parent opted in previously
+loadSavedProfile();
 </script>
 </body>
 </html>
