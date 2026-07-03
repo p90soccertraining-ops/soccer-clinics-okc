@@ -1722,15 +1722,17 @@ function goTo(step) {
 loadSavedProfile();
 
 // ─────────────────────────────────────────────
-//  DIRECT-REGISTER SHORTCUT LINK
-//  ?register=1 (or ?register=mini / ?register=youth) skips the welcome page
-//  and jumps straight into the booking flow — for recurring parents who
-//  already know the clinics, shared via WhatsApp/text rather than the flyer.
-//  The plain link (no params) still shows the welcome page as normal.
+//  LINK ROUTING
+//  The bare link (no params — what parents already have saved from before)
+//  now skips straight to Step 1, matching the old direct-to-registration
+//  behavior. ?welcome=1 is the new link — this is what the flyer/QR code
+//  should point to — and shows the welcome/info page for new parents.
+//  ?register=mini / ?register=youth still works as a shortcut straight to
+//  Step 1 with a specific clinic pre-selected.
 // ─────────────────────────────────────────────
 (function () {
   const params = new URLSearchParams(window.location.search);
-  if (!params.has('register')) return;
+  if (params.has('welcome')) return; // show the welcome page — page's natural state already does this
   const val = params.get('register');
   const clinic = (val === 'mini' || val === 'youth') ? val : null;
   startRegistration(clinic);
